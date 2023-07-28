@@ -16,12 +16,14 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public PlayerMotor playerMotor;
+    public WorldGeneration worldGeneration;
+    public SceneChunkGeneration sceneChunkGeneration;
     public GameObject[] cameras;
 
     private GameState state;
 
 
-    private void Awake()
+    private void Start()
     {
         instance = this;
         state = gameObject.GetComponent<GameStateInit>();

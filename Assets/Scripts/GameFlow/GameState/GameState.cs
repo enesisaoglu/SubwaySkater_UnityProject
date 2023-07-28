@@ -6,7 +6,7 @@ public abstract class GameState : MonoBehaviour
 {
     protected GameManager gameManager;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         gameManager = GetComponent<GameManager>();
     }

@@ -3,33 +3,30 @@ using UnityEngine;
 
 public class WorldGeneration : MonoBehaviour
 {
-    //Gameplay...
+    // Gameplay...
     private float chunkSpawnZ;
-    /* a Queue is being used to store objects of type Chunk. The activeChunks queue will hold instances of the Chunk class,
-     * and you can perform typical queue operations on it, such as adding elements to the back of the queue and 
-     * removing elements from the front.
-     */
+
+    // a Queue is being used to store objects of type Chunk. The activeChunks queue will hold instances of the Chunk class...
     private Queue<Chunk> activeChunks = new Queue<Chunk>();
     private List<Chunk> chunkPool = new List<Chunk>();
 
-    //Configurable fields...
+    // Configurable fields...
     [SerializeField] private int firstChunkSpawnPosition = -10; // Where it should be spawn firstly in the world...
     [SerializeField] private int chunkOnScreen = 5; //How many chunk should we have on the screen at the same time...
     [SerializeField] private float deSpawnDistance = 5.0f; // How far away do we have to go after a chunk we spawn it...
    
-    [SerializeField] private List<GameObject> chunkPrefab; // Dynamic list to keep Prefabs...
+    [SerializeField] private List<GameObject> chunkPrefab; // Dynamic list to keep Chunk Prefabs...
     [SerializeField] private Transform cameraTransform;
 
-    #region TO DELETE $$
     private void Awake()
     {
         ResetWorld();
     }
-    #endregion
+
 
     private void Start()
     {
-        //Check if we have an empty chunkPrefab list...
+        // Check if we have an empty chunkPrefab list...
         if(chunkPrefab.Count == 0)
         {
             Debug.LogError("No chunk prefab found on the world generator, please assign some chunks!");
@@ -37,7 +34,7 @@ public class WorldGeneration : MonoBehaviour
         }
 
 
-        //Try to assign the cameraTransform... 
+        // Try to assign the cameraTransform... 
         if(!cameraTransform)
         {
             cameraTransform = Camera.main.transform;
@@ -45,12 +42,7 @@ public class WorldGeneration : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        ScanPosition();
-    }
-
-    private void ScanPosition()
+    public void ScanPosition()
     {
         float cameraZ = cameraTransform.position.z; // Set cameraZ to the position z of main camera that assigned to cameraTransform... 
         Chunk lastChunk = activeChunks.Peek(); // Returns the element at the front of the queue without removing it...
@@ -86,6 +78,7 @@ public class WorldGeneration : MonoBehaviour
 
         // store the value, to reuse in the pool...
         activeChunks.Enqueue(chunk);
+        // Make 
         chunk.ShowChunk();
     }
 

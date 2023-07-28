@@ -6,6 +6,7 @@ public class Chunk : MonoBehaviour
 
     public Chunk ShowChunk()
     {
+        // Set chunk instance active...
         gameObject.SetActive(true);
 
         return this;
@@ -13,8 +14,11 @@ public class Chunk : MonoBehaviour
 
     public Chunk HideChunk()
     {
+        // Set chunk instance inactive...
         gameObject.SetActive(false);
 
         return this;
     }
+
+
 }
